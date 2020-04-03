@@ -55,16 +55,14 @@ public class Module {
         }
         //.matches("[a-zA-Z0-9]+"
     }
-    public Object execute(String command) {
+    public Object execute(String[] args) {
 
-        String[] args=command.split(" ");
-        int arg=0;
             try {
-                if (args[arg].matches("[0-9]+")) {
-                    if (args[arg + 1].matches("[0-9]+")) {
-                        Integer a = Integer.parseInt(args[arg]);
-                        Integer b = Integer.parseInt(args[arg + 1]);
-                        arg += 2;
+                if (Executor.args[Executor.arg].matches("[0-9]+")) {
+                    if (Executor.args[Executor.arg + 1].matches("[0-9]+")) {
+                        Integer a = Integer.parseInt(Executor.args[Executor.arg]);
+                        Integer b = Integer.parseInt(Executor.args[Executor.arg + 1]);
+                        Executor.arg += 2;
                         return f.execute(a, b);
                     } else {
                         Integer a = Integer.parseInt(Executor.args[Executor.arg]);
