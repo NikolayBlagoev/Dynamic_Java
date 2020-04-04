@@ -3,7 +3,7 @@ Samples for dynamic Java code
 
 Syntax for the interpreter:
 
-add [par1] [par2]  - Gives the sum of par1+par2 (can be integers or other methods)
+add [par1] [par2]  - Gives the sum of par1+par2 (can be integers or other methods)\n
 print [par1] [par2] - Will output to the console par1-times the output of par2 (par1 must be an integer, par2 can be either)
 loop [par1] [par2] - Will run par2 par1-times (par1 must be an integer, par2 can be either)
 def - enter definition of a new method followed by:
