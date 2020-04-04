@@ -1,5 +1,3 @@
-package CustomLoading;
-
 import java.util.HashMap;
 
 public class DynamicClass {

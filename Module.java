@@ -1,5 +1,3 @@
-package CustomLoading;
-
 public class Module {
     SimpleFunction f;
     int arguments = 2;

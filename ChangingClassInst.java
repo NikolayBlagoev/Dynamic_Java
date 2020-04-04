@@ -1,9 +1,8 @@
-package CustomLoading;
-
 public class ChangingClassInst implements ChangingClass {
+
     @Override
     public int calc(Integer a, Integer b) {
-        return a+b+1;
+        return a+b+10;
     }
 
     @Override
