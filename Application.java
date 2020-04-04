@@ -1,16 +1,48 @@
+package CustomLoading;
+
+
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Application {
-    public static void main(String ars[]){
+    public static void main(String ars[])  {
+        //Example 1 - a function generated with custom parameters
+        DemoFunction func1 = generate(2,1, 1, 3);
 
-        SimpleFunction func1 = generate(2,1, 1, 3);
         System.out.println(func1.execute("hi","world"));
+
         System.out.println(func1.execute("hello","there"));
-        SimpleFunction func2 = generate(10,0, 3, 5);
+
+        //Example 2 - a function similar to example 1 but with different parameters given on initialisation
+        DemoFunction func2 = generate(10,0, 3, 5);
         System.out.println(func2.execute("hello","there"));
-        SimpleFunction <String, String, SimpleFunction> func3 = generate2(10,0);
+
+        //Example 3 - a function that returns a function
+        DemoFunction <String, String, DemoFunction> func3 = generate2(10,0);
         System.out.println(func3.execute("hello","there").execute("ho","ho"));
+
+        //Example 4 - a function with varying length of parameters
+        ComplexFunction<Integer> add =(par)->{
+            Integer output = 0;
+            for(int i=0; i<par.length;i++){
+                output+=(Integer) par[i];
+            }
+            return output;
+        };
+
+        Integer[] arr = {4,5,10,3, 5}; //sums to 27
+        System.out.println(add.execute(arr));
+
+        //Example 5 - a class with appended methods to it
+        DynamicClass dynamicClass = new DynamicClass();
+        dynamicClass.methods.get("print").execute(new Object[]{dynamicClass.methods.get("add").execute(arr)});
+
+
         Scanner sc = new Scanner(System.in);
+
+
+        //Example 6 an interpreter-like thing. WARNING: It is a bit buggy so don't use it other than to fool around
+
         Executor ex = new Executor();
         while (true){
            String com = sc.nextLine();
@@ -23,13 +55,12 @@ public class Application {
            }
 
         }
-
-
     }
 
-    public static SimpleFunction generate(int a, int b, int c, int d){
 
-        SimpleFunction<String, String, String> smp = (par1,par2)->{
+    public static DemoFunction generate(int a, int b, int c, int d){
+
+        DemoFunction<String, String, String> smp = (par1,par2)->{
             String output="";
             for(int i=0; i<a;i++) {
                 output+=par1;
@@ -46,15 +77,16 @@ public class Application {
         };
         return smp;
     }
-    public static SimpleFunction<String, String, SimpleFunction> generate2(int a, int b){
+    public static DemoFunction<String, String, DemoFunction> generate2(int a, int b){
 
-        SimpleFunction<String, String, SimpleFunction> smp = (par1,par2)->{
-            SimpleFunction test = generate(a,b,1,2);
+        DemoFunction<String, String, DemoFunction> smp = (par1,par2)->{
+            DemoFunction test = generate(a,b,1,2);
             return test;
         };
         return smp;
     }
 
-}
 
+
+}
 

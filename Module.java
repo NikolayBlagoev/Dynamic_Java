@@ -1,3 +1,5 @@
+package CustomLoading;
+
 public class Module {
     SimpleFunction f;
     int arguments = 2;
@@ -18,36 +20,51 @@ public class Module {
     }
 
     public Object execute() {
-
+        //System.out.println(" Entering "+moduleName+" with argument number "+Executor.arg);
         if (arguments > 0) {
+
             try {
                 if (Executor.args[Executor.arg].matches("[0-9]+")) {
                     if (Executor.args[Executor.arg + 1].matches("[0-9]+")) {
                         Integer a = Integer.parseInt(Executor.args[Executor.arg]);
                         Integer b = Integer.parseInt(Executor.args[Executor.arg + 1]);
                         Executor.arg += 2;
-                        return f.execute(a, b);
+                        Object ob=  f.execute(a, b);
+
+                        return ob;
                     } else {
                         Integer a = Integer.parseInt(Executor.args[Executor.arg]);
                         Module b = Executor.modules.get(Executor.args[Executor.arg + 1]);
                         Executor.arg += 2;
-                        return f.execute(a, b);
+                        Object ob=  f.execute(a, b);
+
+                        return ob;
                     }
                 } else {
-                    if (Executor.args[Executor.arg + 1].matches("[0-9]+")) {
-                        Module a = Executor.modules.get(Executor.args[Executor.arg]);
-                        Integer b = Integer.parseInt(Executor.args[Executor.arg + 1]);
-                        Executor.arg += 2;
-                        return f.execute(a, b);
+                    Integer buff = Executor.arg;
+                    Module a = Executor.modules.get(Executor.args[Executor.arg]);
+                    Executor.arg += 1;
+                    Integer res = (Integer) a.execute();
+
+                    if (Executor.args[Executor.arg ].matches("[0-9]+")) {
+
+                        Integer b = Integer.parseInt(Executor.args[Executor.arg ]);
+                        Executor.arg += 1;
+                        Object ob=  f.execute(res, b);
+
+                        return ob;
                     } else {
-                        Module a = Executor.modules.get(Executor.args[Executor.arg]);
-                        Module b = Executor.modules.get(Executor.args[Executor.arg + 1]);
+
+                        Module b = Executor.modules.get(Executor.args[Executor.arg ]);
+                        Executor.arg += 1;
+                        Integer res2 = (Integer) b.execute();
+                        Object ob=  f.execute(res,res2);
                         Executor.arg += 2;
-                        return f.execute(a, b);
+                        return ob;
                     }
                 }
             } catch (IndexOutOfBoundsException e) {
-                System.out.println("Missing argument at position " + Executor.arg + " " + arguments+" "+moduleName);
+                System.out.println("Index out of bounds "+Executor.arg);
                 return 0;
             }
         } else {
@@ -55,40 +72,6 @@ public class Module {
         }
         //.matches("[a-zA-Z0-9]+"
     }
-    public Object execute(String[] args) {
-
-            try {
-                if (Executor.args[Executor.arg].matches("[0-9]+")) {
-                    if (Executor.args[Executor.arg + 1].matches("[0-9]+")) {
-                        Integer a = Integer.parseInt(Executor.args[Executor.arg]);
-                        Integer b = Integer.parseInt(Executor.args[Executor.arg + 1]);
-                        Executor.arg += 2;
-                        return f.execute(a, b);
-                    } else {
-                        Integer a = Integer.parseInt(Executor.args[Executor.arg]);
-                        Module b = Executor.modules.get(Executor.args[Executor.arg + 1]);
-                        Executor.arg += 2;
-                        return f.execute(a, b);
-                    }
-                } else {
-                    if (Executor.args[Executor.arg + 1].matches("[0-9]+")) {
-                        Module a = Executor.modules.get(Executor.args[Executor.arg]);
-                        Integer b = Integer.parseInt(Executor.args[Executor.arg + 1]);
-                        Executor.arg += 2;
-                        return f.execute(a, b);
-                    } else {
-                        Module a = Executor.modules.get(Executor.args[Executor.arg]);
-                        Module b = Executor.modules.get(Executor.args[Executor.arg + 1]);
-                        Executor.arg += 2;
-                        return f.execute(a, b);
-                    }
-                }
-            } catch (IndexOutOfBoundsException e) {
-                System.out.println("Missing argument at position " + Executor.arg + " " + arguments+" "+moduleName);
-                return 0;
-            }
-        }
-
 
     public void generate(String[] args, int arg){
         Object output=null;
