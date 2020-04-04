@@ -1,8 +1,8 @@
 # Operation_Valkyrie
 Samples for dynamic Java code
-
-Syntax for the interpreter:  
-
+  
+#### Syntax for the interpreter:  
+  
 add [par1] [par2]  - Gives the sum of par1+par2 (can be integers or other methods)  
 print [par1] [par2] - Will output to the console par1-times the output of par2 (par1 must be an integer, par2 can be either)  
 loop [par1] [par2] - Will run par2 par1-times (par1 must be an integer, par2 can be either)  
@@ -19,9 +19,11 @@ Syntax for these functions:
 [newFunctionName] - returns the output saved  
 }  
 
-Example Inputs and outputs:  
+ 
 
 ----
+#### Example Inputs and outputs:  
+  
 print 1 loop 1 add 2 3  
 5  
 print 1 loop 2 add 2 3  
