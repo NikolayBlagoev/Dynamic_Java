@@ -1,10 +1,12 @@
 import javax.tools.JavaCompiler;
 import javax.tools.ToolProvider;
 import java.io.*;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.Scanner;
 
 public class Application {
-    public static void main(String ars[]) throws ClassNotFoundException, IOException, InstantiationException, IllegalAccessException {
+    public static void main(String ars[]) throws ClassNotFoundException, IOException, InstantiationException, IllegalAccessException, NoSuchMethodException, InvocationTargetException {
         //Example 1 - a function generated with custom parameters
         DemoFunction func1 = generate(2, 1, 1, 3);
 
@@ -40,14 +42,18 @@ public class Application {
 
         //Example 6 - Dynamically recompiling a class
         ChangingClass inst1 = get();
+        System.out.println("Go and change ChangingClassInst.java before hitting enter");
         sc.nextLine();
 
         ChangingClass inst2 = get();
 
         System.out.println(inst1.calc(4, 5) + " " + inst2.calc(4, 5));
 
-
-
+        //Method .invoke() demonstrations
+        Method method = inst1.getClass().getMethod("po");
+        Method method2 = inst2.getClass().getMethod("poes");
+        method.invoke(null);
+        method2.invoke(null);
         //Example 7 - an interpreter-like thing. WARNING: It is a bit buggy so don't use it other than to fool around
 
         Executor ex = new Executor();
