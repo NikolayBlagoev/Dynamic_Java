@@ -1,5 +1,7 @@
 # Operation_Valkyrie
-Samples for dynamic Java code
+Samples for dynamic Java code  
+  
+Some detailed explanation: https://www.youtube.com/watch?v=KNBe0Wj3r8s
   
 #### Syntax for the interpreter:  
   
